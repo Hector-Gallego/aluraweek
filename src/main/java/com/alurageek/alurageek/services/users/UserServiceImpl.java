@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alurageek.alurageek.models.Role;
 import com.alurageek.alurageek.models.User;
-import com.alurageek.alurageek.repositories.ICrudRepositoryUser;
-import com.alurageek.alurageek.repositories.IRoleRepository;
+import com.alurageek.alurageek.repositories.UserRepository;
+import com.alurageek.alurageek.repositories.RoleRepository;
 
 
 
@@ -19,10 +19,10 @@ import com.alurageek.alurageek.repositories.IRoleRepository;
 public class UserServiceImpl implements IUserService {
 
     @Autowired
-    private ICrudRepositoryUser userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private IRoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     
     @Override

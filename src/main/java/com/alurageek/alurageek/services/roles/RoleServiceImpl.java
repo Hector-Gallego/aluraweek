@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.alurageek.alurageek.models.Role;
-import com.alurageek.alurageek.repositories.IRoleRepository;
+import com.alurageek.alurageek.repositories.RoleRepository;
 
 
 @Service
@@ -15,7 +15,7 @@ public class RoleServiceImpl implements IRoleService {
 
 
     @Autowired
-    private IRoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Override
     @Transactional(readOnly=true)

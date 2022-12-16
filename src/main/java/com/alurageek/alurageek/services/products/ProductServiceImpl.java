@@ -5,14 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alurageek.alurageek.models.Category;
 import com.alurageek.alurageek.models.Product;
-import com.alurageek.alurageek.repositories.ICrudRepositoryProduct;
+import com.alurageek.alurageek.repositories.ProductRepository;
+import com.alurageek.alurageek.services.categories.CategoryServiceImpl;
 
 @Service
 public class ProductServiceImpl implements IProductService {
 
     @Autowired
-    private ICrudRepositoryProduct productRepository;
+    private ProductRepository productRepository;
+
+    @Autowired
+    private CategoryServiceImpl categoryService;
 
     
     @Override
@@ -30,20 +35,33 @@ public class ProductServiceImpl implements IProductService {
     @Override
     @Transactional
     public Product save(Product product) {
+
+        Category category = product.getCategory();
+        // busco en la base de datos si la categoria existe y la enlazo al objeto
+        Category categoryPersist = categoryService.findById(category.getId());
+
+        product.setCategory(categoryPersist);
+
         return productRepository.save(product);
     }
 
     @Override
     @Transactional
-    public Product update(Product product, Long id) {
+    public Product updateProduct(Product product, Long id) {
 
+       
+    
         Product productPersist = findById(id);
+
         productPersist.setName(product.getName());
         productPersist.setDescription(product.getDescription());
         productPersist.setUrl(product.getUrl());
         productPersist.setPrice(product.getPrice());
+        productPersist.setCategory(product.getCategory());
 
-        return productRepository.save(product);
+        System.out.println("======================================="+productPersist);
+
+        return save(productPersist);
     }
 
     @Override
