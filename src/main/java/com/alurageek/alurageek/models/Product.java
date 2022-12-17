@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 @Entity
@@ -30,7 +31,7 @@ public class Product {
     private String url;
 
     
-    @OneToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="categories_id", referencedColumnName = "id")
     private Category category;
 
