@@ -29,7 +29,7 @@ public class ProductServiceImpl implements IProductService {
     @Override
     @Transactional(readOnly = true)
     public Product findById(Long id) {
-        return productRepository.findById(id).orElse(null);
+        return productRepository.findById(id).get();
     }
 
     @Override
@@ -58,8 +58,6 @@ public class ProductServiceImpl implements IProductService {
         productPersist.setUrl(product.getUrl());
         productPersist.setPrice(product.getPrice());
         productPersist.setCategory(product.getCategory());
-
-        System.out.println("======================================="+productPersist);
 
         return save(productPersist);
     }

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alurageek.alurageek.models.Category;
 import com.alurageek.alurageek.repositories.CategoryRepository;
 @Service
-public class CategoryServiceImpl implements ICategoryService<Category> {
+public class CategoryServiceImpl implements ICategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;

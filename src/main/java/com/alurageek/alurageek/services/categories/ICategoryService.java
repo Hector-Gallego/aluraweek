@@ -2,7 +2,9 @@ package com.alurageek.alurageek.services.categories;
 
 import java.util.List;
 
-public interface ICategoryService<Category> {
+import com.alurageek.alurageek.models.Category;
+
+public interface ICategoryService {
     
     List<Category> findAll();
     Category findById(Long id);

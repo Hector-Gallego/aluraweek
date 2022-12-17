@@ -2,12 +2,13 @@ package com.alurageek.alurageek.services.users;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alurageek.alurageek.exceptions.UserNoFoundException;
 import com.alurageek.alurageek.models.Role;
 import com.alurageek.alurageek.models.User;
 import com.alurageek.alurageek.repositories.UserRepository;
@@ -34,7 +35,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional(readOnly = true)
     public User findByIdUser(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(()->new UserNoFoundException(id));
     }
 
     @Override
@@ -71,6 +72,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional
     public void deleteByIdUser(Long id) {
+
+        // buscamos al usuario si existe de lo contrario lanzamos la exception
+        userRepository.findById(id).orElseThrow(()-> new UserNoFoundException(id));
         userRepository.deleteById(id);   
     }  
 }
